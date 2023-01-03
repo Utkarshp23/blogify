@@ -1,0 +1,47 @@
+package listener;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+
+@WebListener
+public class DtbConnector implements ServletContextListener {
+
+	Connection con;
+   
+    public void contextDestroyed(ServletContextEvent sce)  { 
+    	try {
+			con.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+    }
+
+	
+    public void contextInitialized(ServletContextEvent sce)  { 
+    	String driver=sce.getServletContext().getInitParameter("driver");
+		String jdbcUrl=sce.getServletContext().getInitParameter("jdbcurl");
+		String username=sce.getServletContext().getInitParameter("username");
+		String password=sce.getServletContext().getInitParameter("password");
+		try {
+			Class.forName(driver);
+			con=DriverManager.getConnection(jdbcUrl,username,password);
+			sce.getServletContext().setAttribute("dbcon", con);
+			System.out.println("Connected successfully...");                                                                                        
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+    }
+	
+}
