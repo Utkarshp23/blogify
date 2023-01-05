@@ -1,0 +1,13 @@
+package entities;
+
+public class Topic {
+	private int topicid;
+	private int topicname;
+	private int topicdesc;
+	private int uid;
+
+	public Topic() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

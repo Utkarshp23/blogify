@@ -1,0 +1,14 @@
+package entities;
+
+public class Comment {
+	
+	private int commentid;
+	private String commentcontent;
+	private int topicid;
+	private int userid;
+
+	public Comment() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
